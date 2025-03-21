@@ -1,7 +1,6 @@
-using HP.Tucsone.API;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HP.Tucsone.API.Controllers;
+namespace HP.Tucson.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]

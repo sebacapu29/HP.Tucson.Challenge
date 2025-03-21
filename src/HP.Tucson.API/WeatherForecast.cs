@@ -1,4 +1,4 @@
-namespace HP.Tucsone.API
+namespace HP.Tucson.API
 {
     public class WeatherForecast
     {

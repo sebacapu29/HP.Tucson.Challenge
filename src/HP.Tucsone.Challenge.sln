@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35818.85 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.Tucsone.API", "..\HP.Tucsone.Challenge.API\HP.Tucsone.API.csproj", "{8ADDDA23-8C54-4806-BDD2-B45A25F27111}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.Tucsone.API", "..\HP.Tucsone.API\HP.Tucsone.API.csproj", "{8ADDDA23-8C54-4806-BDD2-B45A25F27111}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.Tucsone.Application", "HP.Tucsone.Application\HP.Tucsone.Application.csproj", "{20F3BB2F-3B02-4FB1-BE8B-E009256DD5C5}"
 EndProject
