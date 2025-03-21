@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.Tucsone.API", "..\HP.Tucsone.Challenge.API\HP.Tucsone.API.csproj", "{8ADDDA23-8C54-4806-BDD2-B45A25F27111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.Tucsone.Application", "HP.Tucsone.Application\HP.Tucsone.Application.csproj", "{20F3BB2F-3B02-4FB1-BE8B-E009256DD5C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.Tucsone.Domain", "HP.Tucsone.Domain\HP.Tucsone.Domain.csproj", "{F75EA03B-5C28-4944-9597-AC964ED6715A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.Tucsone.Infrastructure", "HP.Tucsone.Infrastructure\HP.Tucsone.Infrastructure.csproj", "{3E9BBE82-E59E-4B27-9B62-55EAE25E3F92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.Tucsone.Tests", "HP.Tucsone.Tests\HP.Tucsone.Tests.csproj", "{C37C29B1-840E-458A-881D-7968D53D94E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ADDDA23-8C54-4806-BDD2-B45A25F27111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ADDDA23-8C54-4806-BDD2-B45A25F27111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ADDDA23-8C54-4806-BDD2-B45A25F27111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ADDDA23-8C54-4806-BDD2-B45A25F27111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20F3BB2F-3B02-4FB1-BE8B-E009256DD5C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20F3BB2F-3B02-4FB1-BE8B-E009256DD5C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20F3BB2F-3B02-4FB1-BE8B-E009256DD5C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20F3BB2F-3B02-4FB1-BE8B-E009256DD5C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F75EA03B-5C28-4944-9597-AC964ED6715A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F75EA03B-5C28-4944-9597-AC964ED6715A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F75EA03B-5C28-4944-9597-AC964ED6715A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F75EA03B-5C28-4944-9597-AC964ED6715A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E9BBE82-E59E-4B27-9B62-55EAE25E3F92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E9BBE82-E59E-4B27-9B62-55EAE25E3F92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E9BBE82-E59E-4B27-9B62-55EAE25E3F92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E9BBE82-E59E-4B27-9B62-55EAE25E3F92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37C29B1-840E-458A-881D-7968D53D94E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37C29B1-840E-458A-881D-7968D53D94E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37C29B1-840E-458A-881D-7968D53D94E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37C29B1-840E-458A-881D-7968D53D94E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6BFEC943-7147-44B3-9FCF-E6D91F4FDB09}
+	EndGlobalSection
+EndGlobal
