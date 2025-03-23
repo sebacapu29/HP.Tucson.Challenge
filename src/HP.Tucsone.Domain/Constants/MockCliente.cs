@@ -12,9 +12,9 @@
             return new List<Cliente>()
             {
                 new Cliente(1,"Jose", categoriaClassic),
-                new Cliente(1,"Jose", categoriaGold),
-                new Cliente(1,"Jose", categoriaDiamond),
-                new Cliente(1,"Jose", categoriaPlatinum),
+                new Cliente(2,"Juan", categoriaGold),
+                new Cliente(3,"Pedro", categoriaDiamond),
+                new Cliente(4,"Esteban", categoriaPlatinum),
             };
         }
     }

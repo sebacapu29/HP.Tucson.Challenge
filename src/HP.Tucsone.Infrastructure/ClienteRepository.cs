@@ -1,19 +1,25 @@
 ﻿using HP.Tucsone.Domain;
+using HP.Tucsone.Domain.Constants;
 using HP.Tucsone.Domain.Interfaces;
 
 namespace HP.Tucsone.Infrastructure
 {
     public class ClienteRepository : IClienteRepository
     {
-        private readonly IEnumerable<Cliente> clientesEnEspera;
+        private readonly IEnumerable<Cliente> clientes;
         private readonly IReservaRepository reservaRepository;
-        public Task<IEnumerable<Cliente>> GetClienteEspera()
+
+        public ClienteRepository()
         {
-            return Task.FromResult(this.clientesEnEspera);
+            clientes = MockCliente.GetClientesMock();
+        }
+        public Task<IEnumerable<Cliente>> GetClientes()
+        {
+            return Task.FromResult(this.clientes);
         }
         public async Task AsignarReservaAClienteEspera()
         {
-            var clientesEnEspera = await this.GetClienteEspera();
+            var clientesEnEspera = await this.GetClientes();
             var ultimoClienteEnEspera = clientesEnEspera.LastOrDefault();
             var fechaHora = new DateTime();
             var reservas = await reservaRepository.ListarReservas();
@@ -29,6 +35,11 @@ namespace HP.Tucsone.Infrastructure
                 var reserva = new Reserva(nuevoId, fechaHora, ultimoClienteEnEspera);
                 await this.reservaRepository.CrearReserva(reserva);
             }
+        }
+
+        public Task<Cliente> GetClienteByNumero(int numero)
+        {
+            return Task.FromResult(this.clientes.FirstOrDefault(c => c.Id == numero));
         }
     }
 }

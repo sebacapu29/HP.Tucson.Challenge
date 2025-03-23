@@ -2,6 +2,7 @@
 {
     public interface IClienteRepository
     {
-        Task<IEnumerable<Cliente>> GetClienteEspera();
+        Task<IEnumerable<Cliente>> GetClientes();
+        Task<Cliente> GetClienteByNumero(int numero);
     }
 }
