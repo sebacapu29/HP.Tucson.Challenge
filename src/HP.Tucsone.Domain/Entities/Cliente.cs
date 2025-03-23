@@ -1,17 +1,20 @@
-﻿using static HP.Tucsone.Domain.Reserva;
+﻿using HP.Tucsone.Domain.Entities;
+using static HP.Tucsone.Domain.Reserva;
 
 namespace HP.Tucsone.Domain
 {
-    public abstract class Cliente
+    public class Cliente
     {
         public int Id { get; private set; }
         public string Nombre { get; private set; }
+        public Categoria Categoria { get; private set; }
 
         private Cliente() { }
-        protected Cliente(string nombre)
+        public Cliente(int id, string nombre, Categoria categoria)
         {
             this.Nombre = Nombre;
+            this.Categoria = categoria;
+            Id = id;
         }
-        public abstract TiempoReserva ObtenerTiempoReserva();
     }
 }

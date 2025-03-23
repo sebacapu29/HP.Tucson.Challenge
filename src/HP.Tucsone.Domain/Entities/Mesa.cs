@@ -8,24 +8,25 @@
         private bool Disponible { get; set; }
 
         private Mesa() { }
-        public Mesa(int numero)
+        public Mesa(int numero, int cubiertos)
         {
             this.Numero = numero;
-            Disponible = true;
+            this.Disponible = true;
+            this.Cubiertos = cubiertos;
         }
         public bool EstaDisponible()
         {
-            return Disponible;
+            return this.Disponible;
         }
 
         public void Ocupar()
         {
-            Disponible = true;
+            this.Disponible = true;
         }
 
         public void Liberar()
         {
-            Disponible = false;
+            this.Disponible = false;
         }
     }
 }
