@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HP.Tucsone.Domain\HP.Tucsone.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
