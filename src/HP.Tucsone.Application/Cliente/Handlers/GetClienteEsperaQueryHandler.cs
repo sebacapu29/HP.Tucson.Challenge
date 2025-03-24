@@ -15,7 +15,14 @@ namespace HP.Tucsone.Application.Cliente.Handlers
         }
         public async Task<IEnumerable<GetClienteEsperaResponse>> Handle(GetClienteEsperaQuery request, CancellationToken cancellationToken)
         {
-            return await _clienteEnEsperaService.ObtenerClientesEnEspera();
+            try
+            {
+                return await _clienteEnEsperaService.ObtenerClientesEnEspera();
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

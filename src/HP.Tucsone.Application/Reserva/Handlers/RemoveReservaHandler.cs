@@ -11,22 +11,29 @@ namespace HP.Tucsone.Application.Reserva.Handlers
 
         public RemoveReservaHandler(IReservaRepository reservaRepository)
         {
-           _reservaRepository = reservaRepository;
+            _reservaRepository = reservaRepository;
         }
         public async Task<RemoveReservaResponse> Handle(RemoveReservaCommand request, CancellationToken cancellationToken)
         {
-            var reservasDelCliente = await this._reservaRepository.BuscarReservasDelCliente(request.NumeroCliente);
-            if (!reservasDelCliente.Any())
+            try
             {
-                throw new ArgumentNullException($"No existen reservas para el Cliente {request.NumeroCliente}");
+                var reservasDelCliente = await this._reservaRepository.BuscarReservasDelCliente(request.NumeroCliente);
+                if (!reservasDelCliente.Any())
+                {
+                    throw new ArgumentNullException($"No existen reservas para el Cliente {request.NumeroCliente}");
+                }
+                var reservaEspecifica = reservasDelCliente.Where(r => request.FechaHora.Equals(r.FechaHora)).FirstOrDefault();
+                if (reservaEspecifica == null)
+                {
+                    throw new ArgumentNullException($"No existen la reservas para el Cliente {request.NumeroCliente} en la fecha solicitada");
+                }
+                await this._reservaRepository.EliminarReserva(reservaEspecifica);
+                return new RemoveReservaResponse { Numero = reservaEspecifica?.Cliente?.Numero, FechaHora = request.FechaHora };
             }
-            var reservaEspecifica = reservasDelCliente.Where(r => request.FechaHora.Equals(r.FechaHora)).FirstOrDefault();
-            if (reservaEspecifica == null)
+            catch (Exception)
             {
-                throw new ArgumentNullException($"No existen la reservas para el Cliente {request.NumeroCliente} en la fecha solicitada");
+                throw;
             }
-            await this._reservaRepository.EliminarReserva(reservaEspecifica);
-            return new RemoveReservaResponse { Numero = reservaEspecifica?.Cliente?.Numero, FechaHora = request.FechaHora};
         }
     }
 }

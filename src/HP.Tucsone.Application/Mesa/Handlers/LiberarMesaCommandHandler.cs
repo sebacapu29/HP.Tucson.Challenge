@@ -24,25 +24,32 @@ namespace HP.Tucsone.Application.Mesa.Handlers
         }
         public async Task<LiberarMesaResponse> Handle(LiberarMesaCommand request, CancellationToken cancellationToken)
         {
-            var mesa = _mesaRepository.ObtenerMesaPorNumero(request.Numero);
-            var fechaHora = DateTime.Now;
-            if(mesa == null)
+            try
             {
-                throw new Exception("No se encontró la mesa especificada");
+                var mesa = _mesaRepository.ObtenerMesaPorNumero(request.Numero);
+                var fechaHora = DateTime.Now;
+                if (mesa == null)
+                {
+                    throw new Exception("No se encontró la mesa especificada");
+                }
+                _mesaRepository.LiberarMesa(mesa);
+                var clientesEnEspera = await _clienteEnEsperaService.ObtenerClientesEnEspera();
+                if (clientesEnEspera != null && clientesEnEspera.Any())
+                {
+                    var ultimoClienteEnEspera = clientesEnEspera.Last();
+                    var categoriaCliente = await _clienteRepository.GetCategoriaCliente(ultimoClienteEnEspera.Categoria);
+                    var clienteReserva = new Domain.Cliente(ultimoClienteEnEspera!.NumeroCliente, ultimoClienteEnEspera.Nombre, categoriaCliente);
+                    var idNuevaReserva = await _reservaRepository.GenerarId();
+                    var reservaDeClienteEneEspera = new Domain.Reserva(idNuevaReserva, fechaHora, clienteReserva, mesa.Numero);
+                    await _reservaRepository.CrearReserva(reservaDeClienteEneEspera);
+                    return new LiberarMesaResponse { Mensaje = $"Mesa liberada y se asignó al cliente en espera {ultimoClienteEnEspera.Nombre}" };
+                }
+                return new LiberarMesaResponse { Mensaje = "Mesa liberada" };
             }
-            _mesaRepository.LiberarMesa(mesa);
-            var clientesEnEspera = await _clienteEnEsperaService.ObtenerClientesEnEspera();
-            if (clientesEnEspera != null && clientesEnEspera.Any())
+            catch
             {
-                var ultimoClienteEnEspera = clientesEnEspera.Last();
-                var categoriaCliente = await _clienteRepository.GetCategoriaCliente(ultimoClienteEnEspera.Categoria);
-                var clienteReserva = new Domain.Cliente(ultimoClienteEnEspera!.NumeroCliente, ultimoClienteEnEspera.Nombre, categoriaCliente);
-                var idNuevaReserva = await _reservaRepository.GenerarId();
-                var reservaDeClienteEneEspera = new Domain.Reserva(idNuevaReserva, fechaHora, clienteReserva, mesa.Numero);
-                await _reservaRepository.CrearReserva(reservaDeClienteEneEspera);
-                return new LiberarMesaResponse { Mensaje = $"Mesa liberada y se asignó al cliente en espera {ultimoClienteEnEspera.Nombre}" };
+                throw;
             }
-            return new LiberarMesaResponse { Mensaje = "Mesa liberada" };
         }
     }
 }
