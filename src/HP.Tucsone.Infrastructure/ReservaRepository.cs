@@ -32,7 +32,7 @@ namespace HP.Tucsone.Infrastructure
             var reservaEnLista = _reservas!.FirstOrDefault(r=> r.Id == reserva.Id);
             if(reservaEnLista != null)
             {
-                _reservas!.ToList().Remove(reservaEnLista);
+                _reservas!.Remove(reservaEnLista);
             }
             return Task.CompletedTask;
         }
