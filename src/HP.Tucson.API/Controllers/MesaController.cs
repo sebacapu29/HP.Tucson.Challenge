@@ -1,7 +1,5 @@
 ﻿using HP.Tucsone.Application.Mesa.Models.Commands;
 using HP.Tucsone.Application.Mesa.Models.Responses;
-using HP.Tucsone.Application.Reserva.Models.Commands;
-using HP.Tucsone.Application.Reserva.Models.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
