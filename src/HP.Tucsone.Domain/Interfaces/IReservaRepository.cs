@@ -5,5 +5,6 @@
         Task<Reserva> CrearReserva(Reserva reserva);
         Task<IEnumerable<Reserva>> ListarReservas();
         Task EliminarReserva(Reserva reserva);
+        Task<IEnumerable<Reserva>> BuscarReservasDelCliente(int numeroCliente);
     }
 }

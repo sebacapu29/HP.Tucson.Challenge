@@ -2,5 +2,6 @@
 {
     public class CreateReservaResponse
     {
+        public string Mensaje { get; set; }
     }
 }

@@ -13,11 +13,19 @@ namespace HP.Tucsone.Application.Reserva.Handlers
         {
            _reservaRepository = reservaRepository;
         }
-        public Task<RemoveReservaResponse> Handle(RemoveReservaCommand request, CancellationToken cancellationToken)
+        public async Task<RemoveReservaResponse> Handle(RemoveReservaCommand request, CancellationToken cancellationToken)
         {
-            //buscar reserva
-            //return _reservaRepository.EliminarReserva(new Domain.Reserva(reque));
-            return Task.FromResult(new RemoveReservaResponse());
+            var reservasDelCliente = await this._reservaRepository.BuscarReservasDelCliente(request.NumeroCliente);
+            if (!reservasDelCliente.Any())
+            {
+                throw new ArgumentNullException($"No existen reservas para el Cliente {request.NumeroCliente}");
+            }
+            var reservaEspecifica = reservasDelCliente.Where(r => request.FechaHora.Equals(r.ObtenerFechaHora())).FirstOrDefault();
+            if (reservaEspecifica == null)
+            {
+                throw new ArgumentNullException($"No existen la reservas para el Cliente {request.NumeroCliente} en la fecha solicitada");
+            }
+            return new RemoveReservaResponse { Numero = reservaEspecifica.IdCliente, FechaHora = request.FechaHora};
         }
     }
 }

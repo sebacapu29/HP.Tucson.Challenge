@@ -2,5 +2,6 @@
 {
     public class GetClienteEsperaQuery
     {
+        public int NumeroCliente { get; set; }
     }
 }

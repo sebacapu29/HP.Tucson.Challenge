@@ -23,27 +23,45 @@ namespace HP.Tucsone.Application.Reserva.Handlers
             var mesas = await _mesaRepository.ObtenerTodas();
             var mesaDisponible = mesas.Where(m => m.EstaDisponible());
             var clienteReserva = await _clienteRepository.GetClienteByNumero(request.NumeroCliente);
+            var fechaHoraActual = DateTime.Now;
 
             if (clienteReserva == null)
             {
-                throw new ArgumentNullException($"No se encontró el cliente número: { request.NumeroCliente }");
+                throw new ArgumentNullException($"No se encontró el cliente número: {request.NumeroCliente}");
             }
-            switch (clienteReserva.Categoria.GetNombre().ToLower())
+            bool puedeReservar = PuedeReservar(request.FechaHora, clienteReserva.Categoria.GetNombre());
+            if (!puedeReservar)
             {
-                case "classic":
-                    break;
-                case "gold":
-                    break;
-                case "platinum":
-                    break;
-                case "diamond":
-                    break;
+                throw new Exception("No esta habilitado para reservar");
             }
             if (mesaDisponible.Any())
             {
-                await this._reservaRepository.CrearReserva(new Domain.Reserva(1,request.FechaHora, clienteReserva));
+                await this._reservaRepository.CrearReserva(new Domain.Reserva(1, request.FechaHora, clienteReserva));
             }
             throw new NotImplementedException();
+        }
+        private bool PuedeReservar(DateTime fechaReserva, string categoria)
+        {
+            DateTime fechaHoraActual = DateTime.Now;
+            int horasMinimasRequeridas;
+
+            switch (categoria.ToLower())
+            {
+                case "classic":
+                    horasMinimasRequeridas = 48;
+                    break;
+                case "gold":
+                    horasMinimasRequeridas = 72;
+                    break;
+                case "platinum":
+                    horasMinimasRequeridas = 96;
+                    break;
+                case "diamond":
+                    return true;
+                default:
+                    return false;
+            }
+            return (fechaReserva - fechaHoraActual).TotalHours >= horasMinimasRequeridas;
         }
     }
 }

@@ -11,6 +11,13 @@ namespace HP.Tucsone.Infrastructure
         {
             reservas = new List<Reserva>();
         }
+
+        public Task<IEnumerable<Reserva>> BuscarReservasDelCliente(int numeroCliente)
+        {
+            var reservasDelCliente = this.reservas.Where(x=> x.IdCliente == numeroCliente);
+            return Task.FromResult(reservasDelCliente);
+        }
+
         public Task<Reserva> CrearReserva(Reserva reserva)
         {
             reservas.Append(reserva);
