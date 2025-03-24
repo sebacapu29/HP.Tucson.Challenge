@@ -30,12 +30,15 @@ namespace HP.Tucsone.Application.Services.Implementations
             IDatabase db = _redis.GetDatabase();
             List<GetClienteEsperaResponse> listaClientesEnEspera = new();
             var keys = _redis.GetServer("localhost", 6379).Keys();
-            var listKeys = keys.Select(k=> (string)k).ToList();
+            var listKeys = keys.Select(k=> k.ToString()).ToList();
             var cantidadClientesEnEspera = await db.ListLengthAsync("clientes_en_espera");
             for (int i = 0; i < cantidadClientesEnEspera; i++)
             {
                 var clienteEnEspera = await db.ListGetByIndexAsync("clientes_en_espera", i);
-                listaClientesEnEspera.Add(new GetClienteEsperaResponse { Nombre = clienteEnEspera});
+                var clienteSplit = clienteEnEspera!.ToString()!.Split(';') ?? [];
+                var clienteNombre = clienteSplit != null ? clienteSplit[1] : "-";
+                var clienteNumero = clienteSplit != null ? int.Parse(clienteSplit[0]) : 0;
+                listaClientesEnEspera.Add(new GetClienteEsperaResponse { Nombre = clienteNombre, NumeroCliente = clienteNumero });
             }
             return listaClientesEnEspera;
         }
