@@ -5,16 +5,17 @@ namespace HP.Tucsone.Infrastructure
 {
     public class ReservaRepository : IReservaRepository
     {
-        private readonly IEnumerable<Reserva> reservas;
+        private readonly IReadOnlyList<Reserva> reservas;
+        private readonly IMesaRepository _mesaRepository;
 
         public ReservaRepository()
         {
             reservas = new List<Reserva>();
         }
 
-        public Task<IEnumerable<Reserva>> BuscarReservasDelCliente(int numeroCliente)
+        public Task<IReadOnlyList<Reserva>> BuscarReservasDelCliente(int numeroCliente)
         {
-            var reservasDelCliente = this.reservas.Where(x=> x.IdCliente == numeroCliente);
+            IReadOnlyList<Reserva> reservasDelCliente = this.reservas.Where(x=> x.IdCliente == numeroCliente).ToList();
             return Task.FromResult(reservasDelCliente);
         }
 
@@ -34,7 +35,7 @@ namespace HP.Tucsone.Infrastructure
             return Task.CompletedTask;
         }
 
-        public Task<IEnumerable<Reserva>> ListarReservas()
+        public Task<IReadOnlyList<Reserva>> ListarReservas()
         {
             return Task.FromResult(this.reservas);
         }

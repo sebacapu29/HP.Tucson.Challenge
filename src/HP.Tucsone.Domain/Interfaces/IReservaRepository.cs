@@ -3,8 +3,8 @@
     public interface IReservaRepository
     {
         Task<Reserva> CrearReserva(Reserva reserva);
-        Task<IEnumerable<Reserva>> ListarReservas();
+        Task<IReadOnlyList<Reserva>> ListarReservas();
         Task EliminarReserva(Reserva reserva);
-        Task<IEnumerable<Reserva>> BuscarReservasDelCliente(int numeroCliente);
+        Task<IReadOnlyList<Reserva>> BuscarReservasDelCliente(int numeroCliente);
     }
 }

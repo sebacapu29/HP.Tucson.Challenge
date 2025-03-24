@@ -1,6 +1,6 @@
 ﻿using HP.Tucsone.Application.Reserva.Models.Commands;
 using HP.Tucsone.Application.Reserva.Models.Responses;
-using HP.Tucsone.Domain.Entities;
+using HP.Tucsone.Application.Services.Interfaces;
 using HP.Tucsone.Domain.Interfaces;
 using MediatR;
 
@@ -11,17 +11,23 @@ namespace HP.Tucsone.Application.Reserva.Handlers
         private readonly IReservaRepository _reservaRepository;
         private readonly IMesaRepository _mesaRepository;
         private readonly IClienteRepository _clienteRepository;
+        private readonly IClienteEnEsperaService _clienteEnEsperaService;
 
-        public CreateReservaHandler(IReservaRepository reservaRepository, IMesaRepository mesaRepository, IClienteRepository clienteRepository)
+        public CreateReservaHandler(IReservaRepository reservaRepository, 
+                                    IMesaRepository mesaRepository, 
+                                    IClienteRepository clienteRepository,
+                                    IClienteEnEsperaService clienteEnEsperaService)
         {
-            this._reservaRepository = reservaRepository;
+            _reservaRepository = reservaRepository;
             _mesaRepository = mesaRepository;
             _clienteRepository = clienteRepository;
+            _clienteEnEsperaService = clienteEnEsperaService;
+
         }
         public async Task<CreateReservaResponse> Handle(CreateReservaCommand request, CancellationToken cancellationToken)
         {
-            var mesas = await _mesaRepository.ObtenerTodas();
-            var mesaDisponible = mesas.Where(m => m.EstaDisponible());
+            var mesas = _mesaRepository.ObtenerTodas();
+            var mesaDisponible = mesas.Where(m => m.EstaDisponible()).FirstOrDefault();
             var clienteReserva = await _clienteRepository.GetClienteByNumero(request.NumeroCliente);
             var fechaHoraActual = DateTime.Now;
 
@@ -34,11 +40,13 @@ namespace HP.Tucsone.Application.Reserva.Handlers
             {
                 throw new Exception("No esta habilitado para reservar");
             }
-            if (mesaDisponible.Any())
+            if (mesaDisponible != null)
             {
-                await this._reservaRepository.CrearReserva(new Domain.Reserva(1, request.FechaHora, clienteReserva));
+                var mesaAsignada = await this._reservaRepository.CrearReserva(new Domain.Reserva(1, request.FechaHora, clienteReserva, mesaDisponible.Numero));
+                return new CreateReservaResponse { Mensaje = "Reserva realizada con éxito en mesa {}" };
             }
-            throw new NotImplementedException();
+            await _clienteEnEsperaService.PonerClienteEnEspera(clienteReserva);
+            return new CreateReservaResponse { Mensaje = "Cliente en espera" };
         }
         private bool PuedeReservar(DateTime fechaReserva, string categoria)
         {

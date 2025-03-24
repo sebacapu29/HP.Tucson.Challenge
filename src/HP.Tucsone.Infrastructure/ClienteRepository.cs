@@ -7,11 +7,14 @@ namespace HP.Tucsone.Infrastructure
     public class ClienteRepository : IClienteRepository
     {
         private readonly IEnumerable<Cliente> clientes;
-        private readonly IReservaRepository reservaRepository;
+        private readonly IReservaRepository _reservaRepository;
+        private readonly IMesaRepository _mesaRepository;
 
-        public ClienteRepository()
+        public ClienteRepository(IMesaRepository mesaRepository, IReservaRepository reservaRepository)
         {
             clientes = MockCliente.GetClientesMock();
+            _mesaRepository = mesaRepository;
+            _reservaRepository = reservaRepository;
         }
         public Task<IEnumerable<Cliente>> GetClientes()
         {
@@ -22,18 +25,24 @@ namespace HP.Tucsone.Infrastructure
             var clientesEnEspera = await this.GetClientes();
             var ultimoClienteEnEspera = clientesEnEspera.LastOrDefault();
             var fechaHora = new DateTime();
-            var reservas = await reservaRepository.ListarReservas();
+            var reservas = await _reservaRepository.ListarReservas();
             var ultimaReserva = reservas.LastOrDefault();
             var nuevoId = 0;
+            var mesas = _mesaRepository.ObtenerTodas();
+            var mesaDisponible = mesas.Where(m => m.EstaDisponible()).FirstOrDefault();
 
+            if(mesaDisponible == null)
+            {
+                throw new Exception("No hay mesas disponibles");
+            }
             if (ultimaReserva != null)
             {
                 nuevoId = ultimaReserva!.Id + 1;
             }
             if (ultimoClienteEnEspera != null)
             {
-                var reserva = new Reserva(nuevoId, fechaHora, ultimoClienteEnEspera);
-                await this.reservaRepository.CrearReserva(reserva);
+                var reserva = new Reserva(nuevoId, fechaHora, ultimoClienteEnEspera, mesaDisponible.Numero);
+                await this._reservaRepository.CrearReserva(reserva);
             }
         }
 

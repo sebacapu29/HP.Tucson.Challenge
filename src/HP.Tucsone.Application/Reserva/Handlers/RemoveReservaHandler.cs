@@ -25,6 +25,7 @@ namespace HP.Tucsone.Application.Reserva.Handlers
             {
                 throw new ArgumentNullException($"No existen la reservas para el Cliente {request.NumeroCliente} en la fecha solicitada");
             }
+            await this._reservaRepository.EliminarReserva(reservaEspecifica);
             return new RemoveReservaResponse { Numero = reservaEspecifica.IdCliente, FechaHora = request.FechaHora};
         }
     }

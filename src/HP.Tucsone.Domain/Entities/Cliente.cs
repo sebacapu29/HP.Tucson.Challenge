@@ -1,5 +1,4 @@
 ﻿using HP.Tucsone.Domain.Entities;
-using static HP.Tucsone.Domain.Reserva;
 
 namespace HP.Tucsone.Domain
 {

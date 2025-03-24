@@ -2,6 +2,7 @@
 {
     public interface IMesaRepository
     {
-        Task<IEnumerable<Mesa>> ObtenerTodas();
+        IReadOnlyList<Mesa> ObtenerTodas();
+        void LiberarMesa(Mesa mesa);
     }
 }
