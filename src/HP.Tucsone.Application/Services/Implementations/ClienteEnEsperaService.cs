@@ -48,7 +48,7 @@ namespace HP.Tucsone.Application.Services.Implementations
         public async Task PonerClienteEnEspera(Domain.Cliente cliente)
         {
             var cantidadDeClientes = await _dbRedis.ListLengthAsync(RedisConfig.REDIS_KEY);
-            RedisValue redisValue = new RedisValue($"{cliente.Numero};{cliente.Nombre}");
+            RedisValue redisValue = new RedisValue($"{cliente.Numero};{cliente.Nombre};{cliente?.Categoria?.Nombre}");
 
             await _dbRedis.ListSetByIndexAsync(RedisConfig.REDIS_KEY, cantidadDeClientes + 1, redisValue);
         }
