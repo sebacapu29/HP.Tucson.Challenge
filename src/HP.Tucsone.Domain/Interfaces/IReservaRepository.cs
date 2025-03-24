@@ -6,5 +6,6 @@
         Task<IReadOnlyList<Reserva>?> ListarReservas();
         Task EliminarReserva(Reserva reserva);
         Task<IReadOnlyList<Reserva>> BuscarReservasDelCliente(int numeroCliente);
+        Task<int> GenerarId();
     }
 }

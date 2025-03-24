@@ -15,6 +15,10 @@ namespace HP.Tucsone.Infrastructure
         {
             return this._mesas.ToList().AsReadOnly();
         }
+        public Mesa? ObtenerMesaPorNumero(int numero)
+        {
+            return _mesas.Where(m => m.Numero == numero).FirstOrDefault();
+        }
         public void LiberarMesa(Mesa mesa)
         {
             var mesaOcupada = _mesas.Where(m => m.Numero == mesa.Numero).FirstOrDefault();

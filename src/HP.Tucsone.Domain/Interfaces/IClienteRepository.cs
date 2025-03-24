@@ -1,8 +1,11 @@
-﻿namespace HP.Tucsone.Domain.Interfaces
+﻿using HP.Tucsone.Domain.Entities;
+
+namespace HP.Tucsone.Domain.Interfaces
 {
     public interface IClienteRepository
     {
-        Task<IEnumerable<Cliente>> GetClientes();
+        Task<List<Cliente>> GetClientes();
         Task<Cliente?> GetClienteByNumero(int numero);
+        Task<Categoria> GetCategoriaCliente(string nombre); 
     }
 }

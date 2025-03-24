@@ -1,28 +1,30 @@
 ﻿using HP.Tucsone.Domain;
 using HP.Tucsone.Domain.Constants;
+using HP.Tucsone.Domain.Entities;
 using HP.Tucsone.Domain.Interfaces;
 
 namespace HP.Tucsone.Infrastructure
 {
     public class ClienteRepository : IClienteRepository
     {
-        private readonly IEnumerable<Cliente> clientes;
+        private readonly List<Cliente> _clientes;
         private readonly IReservaRepository _reservaRepository;
         private readonly IMesaRepository _mesaRepository;
-
+        private readonly List<Categoria> _categorias;
         public ClienteRepository(IMesaRepository mesaRepository, IReservaRepository reservaRepository)
         {
-            clientes = MockCliente.GetClientesMock();
+            _clientes = MockCliente.GetClientesMock();
             _mesaRepository = mesaRepository;
             _reservaRepository = reservaRepository;
+            _categorias = MockCategorias.categorias;
         }
-        public Task<IEnumerable<Cliente>> GetClientes()
+        public Task<List<Cliente>> GetClientes()
         {
-            return Task.FromResult(this.clientes);
+            return Task.FromResult(_clientes);
         }
         public async Task AsignarReservaAClienteEspera()
         {
-            var clientesEnEspera = await this.GetClientes();
+            var clientesEnEspera = await GetClientes();
             var ultimoClienteEnEspera = clientesEnEspera.LastOrDefault();
             var fechaHora = new DateTime();
             var reservas = await _reservaRepository.ListarReservas();
@@ -42,13 +44,18 @@ namespace HP.Tucsone.Infrastructure
             if (ultimoClienteEnEspera != null)
             {
                 var reserva = new Reserva(nuevoId, fechaHora, ultimoClienteEnEspera, mesaDisponible.Numero);
-                await this._reservaRepository.CrearReserva(reserva);
+                await _reservaRepository.CrearReserva(reserva);
             }
         }
 
         public Task<Cliente?> GetClienteByNumero(int numero)
         {
-            return Task.FromResult(this.clientes.FirstOrDefault(c => c.Numero == numero));
+            return Task.FromResult(_clientes.FirstOrDefault(c => c.Numero == numero));
+        }
+
+        public Task<Categoria> GetCategoriaCliente(string nombre)
+        {
+            return Task.FromResult(_categorias.Where(c => c.Nombre.ToLower() == nombre.ToLower()).First());
         }
     }
 }

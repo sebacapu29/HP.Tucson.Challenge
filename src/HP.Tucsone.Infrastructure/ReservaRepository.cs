@@ -37,6 +37,12 @@ namespace HP.Tucsone.Infrastructure
             return Task.CompletedTask;
         }
 
+        public Task<int> GenerarId()
+        {
+            var ultimoId = _reservas!.Count + 1;
+            return Task.FromResult(ultimoId);
+        }
+
         public Task<IReadOnlyList<Reserva>?> ListarReservas()
         {
             IReadOnlyList<Reserva> listaReservas = _reservas!.ToList();
