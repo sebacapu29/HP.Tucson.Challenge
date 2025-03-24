@@ -23,9 +23,9 @@ builder.Services.AddMediatR(configuration =>
     configuration.RegisterServicesFromAssembly(typeof(GetClienteEsperaQueryHandler).Assembly);
 });
 
-builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
-builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
-builder.Services.AddScoped<IMesaRepository, MesaRepository>();
+builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
+builder.Services.AddSingleton<IReservaRepository, ReservaRepository>();
+builder.Services.AddSingleton<IMesaRepository, MesaRepository>();
 builder.Services.AddSingleton<IClienteEnEsperaService, ClienteEnEsperaService>();
 
 var app = builder.Build();

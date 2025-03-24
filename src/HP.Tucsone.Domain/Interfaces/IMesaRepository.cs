@@ -4,5 +4,6 @@
     {
         IReadOnlyList<Mesa> ObtenerTodas();
         void LiberarMesa(Mesa mesa);
+        void OcuparMesa(Mesa mesa);
     }
 }

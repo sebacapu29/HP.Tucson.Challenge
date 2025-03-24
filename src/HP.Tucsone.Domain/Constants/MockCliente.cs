@@ -4,10 +4,10 @@
     {
         public static List<Cliente> GetClientesMock()
         {
-            var categoriaClassic = MockCategorias.categorias.Where(c => c.GetNombre().ToLower() == "classic").First();
-            var categoriaGold = MockCategorias.categorias.Where(c => c.GetNombre().ToLower() == "gold").First();
-            var categoriaDiamond = MockCategorias.categorias.Where(c => c.GetNombre().ToLower() == "diamond").First();
-            var categoriaPlatinum = MockCategorias.categorias.Where(c => c.GetNombre().ToLower() == "platinum").First();
+            var categoriaClassic = MockCategorias.categorias.Where(c => c.Nombre.ToLower() == "classic").First();
+            var categoriaGold = MockCategorias.categorias.Where(c => c.Nombre.ToLower() == "gold").First();
+            var categoriaDiamond = MockCategorias.categorias.Where(c => c.Nombre.ToLower() == "diamond").First();
+            var categoriaPlatinum = MockCategorias.categorias.Where(c => c.Nombre.ToLower() == "platinum").First();
 
             return new List<Cliente>()
             {

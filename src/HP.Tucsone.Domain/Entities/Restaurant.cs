@@ -2,9 +2,9 @@
 {
     public class Restaurant
     {
-        public string Nombre { get; private set; }
-        private List<Reserva> Reservas { get; set; }
-        private List<Mesa> Mesas { get; set; }
+        public string? Nombre { get; private set; }
+        private List<Reserva>? Reservas { get; set; }
+        private List<Mesa>? Mesas { get; set; }
 
         public Restaurant(string nombre)
         {
@@ -16,17 +16,17 @@
 
         public IReadOnlyList<Reserva> ListarReservas()
         {
-            return this.Reservas.AsReadOnly();
+            return Reservas!.AsReadOnly();
         }
         public IReadOnlyList<Mesa> ListarMesas()
         {
-            return this.Mesas.AsReadOnly();
+            return Mesas!.AsReadOnly();
         }
         public void AgregarReserva(Reserva reserva)
         {
-            if(this.Reservas != null)
+            if(Reservas != null)
             {
-                this.Reservas.ToList().Add(reserva);
+                Reservas.ToList().Add(reserva);
             }
         }
     }

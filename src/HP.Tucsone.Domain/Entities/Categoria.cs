@@ -3,20 +3,16 @@
     public class Categoria
     {
         private int Id { get; set; }
-        private string Nombre { get; set; }
+        public string Nombre { get; private set; }
 
-        public Categoria(int id, string Nombre)
+        public Categoria(int id, string nombre)
         {
-            this.Id = id;
-            this.Nombre = Nombre;
+            Id = id;
+            Nombre = nombre;
         }
         public int GetId()
         {
             return Id;
-        }
-        public string GetNombre()
-        {
-            return Nombre;
         }
     }
 }

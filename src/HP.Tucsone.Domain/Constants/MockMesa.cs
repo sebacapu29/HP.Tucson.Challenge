@@ -2,15 +2,15 @@
 {
     public static class MockMesa
     {
-        public static IEnumerable<Mesa> GetMesas()
+        public static List<Mesa> GetMesas()
         {
             var listaMesas = new List<Mesa>();
-            for (int i = 1; i < 40; i++) { 
+            for (int i = 1; i <= 40; i++) { 
                 if( i <= 18)
                 {
                     listaMesas.Add(new Mesa(i, 2));
                 }
-                if( i > 18 && i <= 33)
+                else if( i > 18 && i <= 33)
                 {
                     listaMesas.Add(new Mesa(i,4));
                 }

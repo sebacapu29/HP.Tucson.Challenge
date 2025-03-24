@@ -2,6 +2,6 @@
 {
     public class CreateReservaResponse
     {
-        public string Mensaje { get; set; }
+        public string? Mensaje { get; set; }
     }
 }

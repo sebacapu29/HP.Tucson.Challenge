@@ -27,7 +27,7 @@ namespace HP.Tucsone.Application.Reserva.Handlers
         public async Task<CreateReservaResponse> Handle(CreateReservaCommand request, CancellationToken cancellationToken)
         {
             var mesas = _mesaRepository.ObtenerTodas();
-            var mesaDisponible = mesas.Where(m => m.EstaDisponible()).FirstOrDefault();
+            var mesaDisponible = mesas.Where(m => m.Disponible).FirstOrDefault();
             var clienteReserva = await _clienteRepository.GetClienteByNumero(request.NumeroCliente);
             var fechaHoraActual = DateTime.Now;
 
@@ -35,15 +35,16 @@ namespace HP.Tucsone.Application.Reserva.Handlers
             {
                 throw new ArgumentNullException($"No se encontró el cliente número: {request.NumeroCliente}");
             }
-            bool puedeReservar = PuedeReservar(request.FechaHora, clienteReserva.Categoria.GetNombre());
+            bool puedeReservar = PuedeReservar(request.FechaHora, clienteReserva!.Categoria!.Nombre);
             if (!puedeReservar)
             {
                 throw new Exception("No esta habilitado para reservar");
             }
             if (mesaDisponible != null)
             {
-                var mesaAsignada = await this._reservaRepository.CrearReserva(new Domain.Reserva(1, request.FechaHora, clienteReserva, mesaDisponible.Numero));
-                return new CreateReservaResponse { Mensaje = "Reserva realizada con éxito en mesa {}" };
+                var reserva = await this._reservaRepository.CrearReserva(new Domain.Reserva(1, request.FechaHora, clienteReserva, mesaDisponible.Numero));                
+                _mesaRepository.OcuparMesa(mesaDisponible);
+                return new CreateReservaResponse { Mensaje = $"Reserva realizada con éxito en mesa { reserva.NumeroMesa }" };
             }
             await _clienteEnEsperaService.PonerClienteEnEspera(clienteReserva);
             return new CreateReservaResponse { Mensaje = "Cliente en espera" };

@@ -6,7 +6,7 @@ namespace HP.Tucsone.Infrastructure
 {
     public class MesaRepository : IMesaRepository
     {
-        private readonly IEnumerable<Mesa> _mesas;
+        private readonly List<Mesa> _mesas;
         public MesaRepository()
         {
             _mesas = MockMesa.GetMesas();
@@ -21,6 +21,25 @@ namespace HP.Tucsone.Infrastructure
             if (mesaOcupada != null) 
             {
                 mesaOcupada.Liberar();
+                ActualizarEstadoMesas(mesa);
+            }
+        }
+
+        public void OcuparMesa(Mesa mesa)
+        {
+            var mesaOcupada = _mesas.Where(m => m.Numero == mesa.Numero).FirstOrDefault();
+            if (mesaOcupada != null)
+            {
+                mesaOcupada.Ocupar();
+                ActualizarEstadoMesas(mesa);
+            }
+        }
+        private void ActualizarEstadoMesas(Mesa mesa)
+        {
+            var indexMesa = _mesas.IndexOf(mesa);
+            if(indexMesa != -1)
+            {
+                _mesas[indexMesa] = mesa;
             }
         }
     }

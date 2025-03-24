@@ -2,6 +2,6 @@
 {
     public class LiberarMesaResponse
     {
-        public string Mensaje { get; set; }
+        public string? Mensaje { get; set; }
     }
 }

@@ -2,31 +2,25 @@
 {
     public class Mesa
     {
-        public int Id { get; private set; }
-        public int Numero { get; private set; }
-        public int Cubiertos { get; private set; }
-        private bool Disponible { get; set; }
+        public int Numero { get;  private set; }
+        public int Cubiertos { get;  private set; }
+        public bool Disponible { get; private set; }
 
         private Mesa() { }
         public Mesa(int numero, int cubiertos)
         {
-            this.Numero = numero;
-            this.Disponible = true;
-            this.Cubiertos = cubiertos;
-        }
-        public bool EstaDisponible()
-        {
-            return this.Disponible;
+            Numero = numero;
+            Cubiertos = cubiertos;
+            Disponible = true;
         }
 
         public void Ocupar()
         {
-            this.Disponible = true;
+            Disponible = false;
         }
-
         public void Liberar()
         {
-            this.Disponible = false;
+            Disponible = true;
         }
     }
 }

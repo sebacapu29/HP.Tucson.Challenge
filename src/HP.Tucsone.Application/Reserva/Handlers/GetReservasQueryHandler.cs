@@ -16,8 +16,8 @@ namespace HP.Tucsone.Application.Reserva.Handlers
         public async Task<List<GetReservasResponse>> Handle(GetReservasQuery request, CancellationToken cancellationToken)
         {
             var reservas = await this._reservaRepository.ListarReservas();
-            var response = reservas.Select(r => new GetReservasResponse { FechaHora = r.ObtenerFechaHora(), NumeroCliente = r.IdCliente });
-            return response.ToList();
+            var response = reservas!.Select(r => new GetReservasResponse { FechaHora = r.FechaHora, NumeroCliente = r?.Cliente?.Numero });
+            return response!.ToList();
         }
     }
 }

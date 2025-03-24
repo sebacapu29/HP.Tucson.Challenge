@@ -26,10 +26,10 @@ namespace HP.Tucsone.Infrastructure
             var ultimoClienteEnEspera = clientesEnEspera.LastOrDefault();
             var fechaHora = new DateTime();
             var reservas = await _reservaRepository.ListarReservas();
-            var ultimaReserva = reservas.LastOrDefault();
+            var ultimaReserva = reservas?.LastOrDefault();
             var nuevoId = 0;
             var mesas = _mesaRepository.ObtenerTodas();
-            var mesaDisponible = mesas.Where(m => m.EstaDisponible()).FirstOrDefault();
+            var mesaDisponible = mesas.Where(m => m.Disponible).FirstOrDefault();
 
             if(mesaDisponible == null)
             {
@@ -46,9 +46,9 @@ namespace HP.Tucsone.Infrastructure
             }
         }
 
-        public Task<Cliente> GetClienteByNumero(int numero)
+        public Task<Cliente?> GetClienteByNumero(int numero)
         {
-            return Task.FromResult(this.clientes.FirstOrDefault(c => c.Id == numero));
+            return Task.FromResult(this.clientes.FirstOrDefault(c => c.Numero == numero));
         }
     }
 }

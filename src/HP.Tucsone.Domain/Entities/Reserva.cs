@@ -3,10 +3,9 @@
     public class Reserva
     {
         public int Id { get; private set; }
-        private DateTime FechaHora { get; set; }
-        public Cliente Cliente { get; private set; }
-        public int IdCliente { get; private set; }
-        private int NumeroMesa { get; set; }
+        public DateTime FechaHora { get; private set; }
+        public Cliente? Cliente { get; private set; }
+        public int NumeroMesa { get; private set; }
         private Reserva() {}
         public Reserva(int id, DateTime fechaHora, Cliente cliente, int numeroMesa)
         {
@@ -14,10 +13,6 @@
             FechaHora = fechaHora;
             Cliente = cliente;
             NumeroMesa = numeroMesa;
-        }
-        public DateTime ObtenerFechaHora()
-        {
-            return this.FechaHora;
         }
         public enum TiempoReserva
         {

@@ -20,13 +20,13 @@ namespace HP.Tucsone.Application.Reserva.Handlers
             {
                 throw new ArgumentNullException($"No existen reservas para el Cliente {request.NumeroCliente}");
             }
-            var reservaEspecifica = reservasDelCliente.Where(r => request.FechaHora.Equals(r.ObtenerFechaHora())).FirstOrDefault();
+            var reservaEspecifica = reservasDelCliente.Where(r => request.FechaHora.Equals(r.FechaHora)).FirstOrDefault();
             if (reservaEspecifica == null)
             {
                 throw new ArgumentNullException($"No existen la reservas para el Cliente {request.NumeroCliente} en la fecha solicitada");
             }
             await this._reservaRepository.EliminarReserva(reservaEspecifica);
-            return new RemoveReservaResponse { Numero = reservaEspecifica.IdCliente, FechaHora = request.FechaHora};
+            return new RemoveReservaResponse { Numero = reservaEspecifica?.Cliente?.Numero, FechaHora = request.FechaHora};
         }
     }
 }
