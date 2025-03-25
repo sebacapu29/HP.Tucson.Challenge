@@ -1,4 +1,6 @@
-﻿namespace HP.Tucsone.Domain.Constants
+﻿using HP.Tucsone.Domain.Entities;
+
+namespace HP.Tucsone.Domain.Constants
 {
     public static class MockMesa
     {

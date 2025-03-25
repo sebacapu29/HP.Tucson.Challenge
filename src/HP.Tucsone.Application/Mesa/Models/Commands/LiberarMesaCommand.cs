@@ -1,7 +1,7 @@
-﻿using HP.Tucsone.Application.Mesa.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureMesa.Models.Responses;
 using MediatR;
 
-namespace HP.Tucsone.Application.Mesa.Models.Commands
+namespace HP.Tucsone.Application.FeatureMesa.Models.Commands
 {
     public class LiberarMesaCommand : IRequest<LiberarMesaResponse>
     {

@@ -1,9 +1,9 @@
-﻿using HP.Tucsone.Application.Reserva.Models.Queries;
-using HP.Tucsone.Application.Reserva.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureReserva.Models.Queries;
+using HP.Tucsone.Application.FeatureReserva.Models.Responses;
 using HP.Tucsone.Domain.Interfaces;
 using MediatR;
 
-namespace HP.Tucsone.Application.Reserva.Handlers
+namespace HP.Tucsone.Application.FeatureReserva.Handlers
 {
     public class GetReservasQueryHandler : IRequestHandler<GetReservasQuery, List<GetReservasResponse>>
     {

@@ -1,6 +1,6 @@
-using HP.Tucsone.Application.Cliente.Handlers;
-using HP.Tucsone.Application.Mesa.Handlers;
-using HP.Tucsone.Application.Reserva.Handlers;
+using HP.Tucsone.Application.FeatureCliente.Handlers;
+using HP.Tucsone.Application.FeatureMesa.Handlers;
+using HP.Tucsone.Application.FeatureReserva.Handlers;
 using HP.Tucsone.Application.Services.Implementations;
 using HP.Tucsone.Application.Services.Interfaces;
 using HP.Tucsone.Domain.Interfaces;

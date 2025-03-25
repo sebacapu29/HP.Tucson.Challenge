@@ -1,7 +1,7 @@
-﻿using HP.Tucsone.Application.Cliente.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureCliente.Models.Responses;
 using MediatR;
 
-namespace HP.Tucsone.Application.Cliente.Models.Queries
+namespace HP.Tucsone.Application.FeatureCliente.Models.Queries
 {
     public class GetClienteEsperaQuery : IRequest<IEnumerable<GetClienteEsperaResponse>>
     {

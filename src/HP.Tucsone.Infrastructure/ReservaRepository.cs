@@ -1,4 +1,4 @@
-﻿using HP.Tucsone.Domain;
+﻿using HP.Tucsone.Domain.Entities;
 using HP.Tucsone.Domain.Interfaces;
 
 namespace HP.Tucsone.Infrastructure

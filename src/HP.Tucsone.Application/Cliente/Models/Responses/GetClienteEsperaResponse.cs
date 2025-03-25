@@ -1,4 +1,4 @@
-﻿namespace HP.Tucsone.Application.Cliente.Models.Responses
+﻿namespace HP.Tucsone.Application.FeatureCliente.Models.Responses
 {
     public class GetClienteEsperaResponse
     {

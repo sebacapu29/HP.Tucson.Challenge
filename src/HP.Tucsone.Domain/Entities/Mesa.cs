@@ -1,4 +1,4 @@
-﻿namespace HP.Tucsone.Domain
+﻿namespace HP.Tucsone.Domain.Entities
 {
     public class Mesa
     {

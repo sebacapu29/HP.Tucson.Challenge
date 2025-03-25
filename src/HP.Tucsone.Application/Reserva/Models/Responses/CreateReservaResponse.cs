@@ -1,4 +1,4 @@
-﻿namespace HP.Tucsone.Application.Reserva.Models.Responses
+﻿namespace HP.Tucsone.Application.FeatureReserva.Models.Responses
 {
     public class CreateReservaResponse
     {

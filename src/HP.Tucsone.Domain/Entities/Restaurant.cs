@@ -1,4 +1,4 @@
-﻿namespace HP.Tucsone.Domain
+﻿namespace HP.Tucsone.Domain.Entities
 {
     public class Restaurant
     {
@@ -8,7 +8,7 @@
 
         public Restaurant(string nombre)
         {
-            this.Nombre = nombre;
+            Nombre = nombre;
             Mesas = new List<Mesa>();
             Reservas = new List<Reserva>();
         }

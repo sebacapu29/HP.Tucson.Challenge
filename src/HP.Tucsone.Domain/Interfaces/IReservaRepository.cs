@@ -1,4 +1,6 @@
-﻿namespace HP.Tucsone.Domain.Interfaces
+﻿using HP.Tucsone.Domain.Entities;
+
+namespace HP.Tucsone.Domain.Interfaces
 {
     public interface IReservaRepository
     {

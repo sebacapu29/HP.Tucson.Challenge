@@ -1,5 +1,6 @@
-﻿using HP.Tucsone.Application.Reserva.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureReserva.Models.Responses;
 using HP.Tucsone.Domain;
+using HP.Tucsone.Domain.Entities;
 
 namespace HP.Tucsone.Tests.Mocks
 {

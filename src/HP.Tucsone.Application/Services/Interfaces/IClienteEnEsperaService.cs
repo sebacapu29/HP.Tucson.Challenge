@@ -1,12 +1,12 @@
-﻿
-using HP.Tucsone.Application.Cliente.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureCliente.Models.Responses;
+using HP.Tucsone.Domain.Entities;
 
 namespace HP.Tucsone.Application.Services.Interfaces
 {
     public interface IClienteEnEsperaService
     {
-        Task EliminarClienteEnEspera(Domain.Cliente cliente);
+        Task EliminarClienteEnEspera(Cliente cliente);
         Task<List<GetClienteEsperaResponse>> ObtenerClientesEnEspera();
-        Task PonerClienteEnEspera(Domain.Cliente cliente);
+        Task PonerClienteEnEspera(Cliente cliente);
     }
 }

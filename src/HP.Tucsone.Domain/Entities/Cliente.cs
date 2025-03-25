@@ -1,6 +1,4 @@
-﻿using HP.Tucsone.Domain.Entities;
-
-namespace HP.Tucsone.Domain
+﻿namespace HP.Tucsone.Domain.Entities
 {
     public class Cliente
     {

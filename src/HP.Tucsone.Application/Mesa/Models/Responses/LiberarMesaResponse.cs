@@ -1,4 +1,4 @@
-﻿namespace HP.Tucsone.Application.Mesa.Models.Responses
+﻿namespace HP.Tucsone.Application.FeatureMesa.Models.Responses
 {
     public class LiberarMesaResponse
     {

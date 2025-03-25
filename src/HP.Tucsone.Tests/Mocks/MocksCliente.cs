@@ -1,4 +1,4 @@
-﻿using HP.Tucsone.Application.Cliente.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureCliente.Models.Responses;
 
 namespace HP.Tucsone.Tests.Mocks
 {

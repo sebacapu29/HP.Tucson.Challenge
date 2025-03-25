@@ -1,8 +1,5 @@
-﻿using HP.Tucsone.Application.Cliente.Handlers;
-using HP.Tucsone.Application.Cliente.Models.Queries;
-using HP.Tucsone.Application.Reserva.Handlers;
-using HP.Tucsone.Application.Reserva.Models.Queries;
-using HP.Tucsone.Application.Services.Interfaces;
+﻿using HP.Tucsone.Application.FeatureReserva.Handlers;
+using HP.Tucsone.Application.FeatureReserva.Models.Queries;
 using HP.Tucsone.Domain.Interfaces;
 using HP.Tucsone.Tests.Mocks;
 using Moq;

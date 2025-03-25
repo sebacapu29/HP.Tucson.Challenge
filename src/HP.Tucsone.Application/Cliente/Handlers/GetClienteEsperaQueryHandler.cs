@@ -1,9 +1,9 @@
-﻿using HP.Tucsone.Application.Cliente.Models.Queries;
-using HP.Tucsone.Application.Cliente.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureCliente.Models.Queries;
+using HP.Tucsone.Application.FeatureCliente.Models.Responses;
 using HP.Tucsone.Application.Services.Interfaces;
 using MediatR;
 
-namespace HP.Tucsone.Application.Cliente.Handlers
+namespace HP.Tucsone.Application.FeatureCliente.Handlers
 {
     public class GetClienteEsperaQueryHandler : IRequestHandler<GetClienteEsperaQuery, IEnumerable<GetClienteEsperaResponse>>
     {

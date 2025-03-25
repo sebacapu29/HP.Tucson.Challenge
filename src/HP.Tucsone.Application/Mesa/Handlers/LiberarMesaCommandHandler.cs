@@ -1,10 +1,12 @@
-﻿using HP.Tucsone.Application.Mesa.Models.Commands;
-using HP.Tucsone.Application.Mesa.Models.Responses;
+﻿using HP.Tucsone.Application.Exceptions;
+using HP.Tucsone.Application.FeatureMesa.Models.Commands;
+using HP.Tucsone.Application.FeatureMesa.Models.Responses;
 using HP.Tucsone.Application.Services.Interfaces;
+using HP.Tucsone.Domain.Entities;
 using HP.Tucsone.Domain.Interfaces;
 using MediatR;
 
-namespace HP.Tucsone.Application.Mesa.Handlers
+namespace HP.Tucsone.Application.FeatureMesa.Handlers
 {
     public class LiberarMesaCommandHandler : IRequestHandler<LiberarMesaCommand, LiberarMesaResponse>
     {
@@ -30,7 +32,7 @@ namespace HP.Tucsone.Application.Mesa.Handlers
                 var fechaHora = DateTime.Now;
                 if (mesa == null)
                 {
-                    throw new Exception("No se encontró la mesa especificada");
+                    throw new MesaNotFoundException("No se encontró la mesa especificada");
                 }
                 _mesaRepository.LiberarMesa(mesa);
                 var clientesEnEspera = await _clienteEnEsperaService.ObtenerClientesEnEspera();
@@ -38,18 +40,18 @@ namespace HP.Tucsone.Application.Mesa.Handlers
                 {
                     var ultimoClienteEnEspera = clientesEnEspera.Last();
                     var categoriaCliente = await _clienteRepository.GetCategoriaCliente(ultimoClienteEnEspera.Categoria);
-                    var clienteReserva = new Domain.Cliente(ultimoClienteEnEspera!.NumeroCliente, ultimoClienteEnEspera.Nombre, categoriaCliente);
+                    var clienteReserva = new Cliente(ultimoClienteEnEspera!.NumeroCliente, ultimoClienteEnEspera.Nombre, categoriaCliente);
                     var idNuevaReserva = await _reservaRepository.GenerarId();
-                    var reservaDeClienteEneEspera = new Domain.Reserva(idNuevaReserva, fechaHora, clienteReserva, mesa.Numero);
+                    var reservaDeClienteEneEspera = new Reserva(idNuevaReserva, fechaHora, clienteReserva, mesa.Numero);
                     await _reservaRepository.CrearReserva(reservaDeClienteEneEspera);
                     await _clienteEnEsperaService.EliminarClienteEnEspera(clienteReserva);
                     return new LiberarMesaResponse { Mensaje = $"Mesa liberada y se asignó al cliente en espera {ultimoClienteEnEspera.Nombre}" };
                 }
                 return new LiberarMesaResponse { Mensaje = "Mesa liberada" };
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                throw new UnespectedException("Ocurrio un error en la clase al liberar mesa", ex);
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿using HP.Tucsone.Application.Cliente.Handlers;
-using HP.Tucsone.Application.Cliente.Models.Queries;
+﻿using HP.Tucsone.Application.FeatureCliente.Handlers;
+using HP.Tucsone.Application.FeatureCliente.Models.Queries;
 using HP.Tucsone.Application.Services.Interfaces;
 using HP.Tucsone.Tests.Mocks;
 using Moq;

@@ -1,10 +1,11 @@
-﻿using HP.Tucsone.Application.Reserva.Models.Commands;
-using HP.Tucsone.Application.Reserva.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureReserva.Models.Commands;
+using HP.Tucsone.Application.FeatureReserva.Models.Responses;
 using HP.Tucsone.Application.Services.Interfaces;
+using HP.Tucsone.Domain.Entities;
 using HP.Tucsone.Domain.Interfaces;
 using MediatR;
 
-namespace HP.Tucsone.Application.Reserva.Handlers
+namespace HP.Tucsone.Application.FeatureReserva.Handlers
 {
     public class CreateReservaCommandHandler : IRequestHandler<CreateReservaCommand, CreateReservaResponse>
     {
@@ -45,7 +46,7 @@ namespace HP.Tucsone.Application.Reserva.Handlers
                 if (mesaDisponible != null)
                 {
                     var idNuevaReserva = await _reservaRepository.GenerarId();
-                    var reserva = await _reservaRepository.CrearReserva(new Domain.Reserva(idNuevaReserva, request.FechaHora, clienteReserva, mesaDisponible.Numero));
+                    var reserva = await _reservaRepository.CrearReserva(new Reserva(idNuevaReserva, request.FechaHora, clienteReserva, mesaDisponible.Numero));
                     _mesaRepository.OcuparMesa(mesaDisponible);
                     return new CreateReservaResponse { Mensaje = $"Reserva realizada con éxito en mesa {reserva.NumeroMesa}" };
                 }
