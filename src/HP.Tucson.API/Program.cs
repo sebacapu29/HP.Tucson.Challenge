@@ -17,8 +17,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssembly(typeof(GetReservasQueryHandler).Assembly);
-    configuration.RegisterServicesFromAssembly(typeof(CreateReservaHandler).Assembly);
-    configuration.RegisterServicesFromAssembly(typeof(RemoveReservaHandler).Assembly);
+    configuration.RegisterServicesFromAssembly(typeof(CreateReservaCommandHandler).Assembly);
+    configuration.RegisterServicesFromAssembly(typeof(RemoveReservaCommandHandler).Assembly);
     configuration.RegisterServicesFromAssembly(typeof(LiberarMesaCommandHandler).Assembly);
     configuration.RegisterServicesFromAssembly(typeof(GetClienteEsperaQueryHandler).Assembly);
 });

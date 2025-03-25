@@ -5,11 +5,11 @@ using MediatR;
 
 namespace HP.Tucsone.Application.Reserva.Handlers
 {
-    public class RemoveReservaHandler : IRequestHandler<RemoveReservaCommand, RemoveReservaResponse>
+    public class RemoveReservaCommandHandler : IRequestHandler<RemoveReservaCommand, RemoveReservaResponse>
     {
         private readonly IReservaRepository _reservaRepository;
 
-        public RemoveReservaHandler(IReservaRepository reservaRepository)
+        public RemoveReservaCommandHandler(IReservaRepository reservaRepository)
         {
             _reservaRepository = reservaRepository;
         }

@@ -6,14 +6,14 @@ using MediatR;
 
 namespace HP.Tucsone.Application.Reserva.Handlers
 {
-    public class CreateReservaHandler : IRequestHandler<CreateReservaCommand, CreateReservaResponse>
+    public class CreateReservaCommandHandler : IRequestHandler<CreateReservaCommand, CreateReservaResponse>
     {
         private readonly IReservaRepository _reservaRepository;
         private readonly IMesaRepository _mesaRepository;
         private readonly IClienteRepository _clienteRepository;
         private readonly IClienteEnEsperaService _clienteEnEsperaService;
 
-        public CreateReservaHandler(IReservaRepository reservaRepository,
+        public CreateReservaCommandHandler(IReservaRepository reservaRepository,
                                     IMesaRepository mesaRepository,
                                     IClienteRepository clienteRepository,
                                     IClienteEnEsperaService clienteEnEsperaService)

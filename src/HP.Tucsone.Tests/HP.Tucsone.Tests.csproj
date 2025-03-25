@@ -22,11 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Mesa\" />
-    <Folder Include="Application\Reserva\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\HP.Tucsone.Application\HP.Tucsone.Application.csproj" />
     <ProjectReference Include="..\HP.Tucsone.Domain\HP.Tucsone.Domain.csproj" />
     <ProjectReference Include="..\HP.Tucsone.Infrastructure\HP.Tucsone.Infrastructure.csproj" />
