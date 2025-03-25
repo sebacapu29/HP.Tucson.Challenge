@@ -17,15 +17,11 @@ namespace HP.Tucsone.Application.Services.Implementations
             _subscriber = _redis.GetSubscriber();
             _dbRedis = _redis.GetDatabase();
         }
-        public void EscucharClientesEnEspera()
-        {
-            RedisChannel channelWithLiteral = new RedisChannel("cliente_en_espera", RedisChannel.PatternMode.Literal);
-            _subscriber.SubscribeAsync(channelWithLiteral, (channel, mensaje) =>
-            {
-                Console.WriteLine($"Cliente en espera: La mesa {mensaje} está disponible.");
-            });
 
-            Console.WriteLine("Escuchando mesas disponibles...");
+        public async Task EliminarClienteEnEspera(Domain.Cliente cliente)
+        {
+            RedisValue clienteEnEspera = new RedisValue($"{cliente.Numero};{cliente?.Nombre?.ToLower()};{cliente?.Categoria?.Nombre.ToLower()}");
+            await _dbRedis.ListRemoveAsync(RedisConfig.REDIS_KEY, clienteEnEspera);
         }
 
         public async Task<List<GetClienteEsperaResponse>> ObtenerClientesEnEspera()
@@ -33,24 +29,33 @@ namespace HP.Tucsone.Application.Services.Implementations
             List<GetClienteEsperaResponse> listaClientesEnEspera = new();
             var keys = _redis.GetServer( RedisConfig.HOST, RedisConfig.PORT).Keys();
             var listKeys = keys.Select(k=> k.ToString()).ToList();
-            var cantidadClientesEnEspera = await _dbRedis.ListLengthAsync(RedisConfig.REDIS_KEY);
+            var cantidadClientesEnEspera = await ObtenerCantidadDeClientes();
             for (int i = 0; i < cantidadClientesEnEspera; i++)
             {
-                var clienteEnEspera = await _dbRedis.ListGetByIndexAsync(RedisConfig.REDIS_KEY, i);
+                var clienteEnEspera = await ObtenerClienteEnEsperaByIndex(i);
                 var clienteSplit = clienteEnEspera!.ToString()!.Split(';') ?? [];
                 var clienteNombre = clienteSplit != null ? clienteSplit[1] : "-";
                 var clienteNumero = clienteSplit != null ? int.Parse(clienteSplit[0]) : 0;
-                listaClientesEnEspera.Add(new GetClienteEsperaResponse { Nombre = clienteNombre, NumeroCliente = clienteNumero });
+                var clienteCategoria = clienteSplit != null ? clienteSplit[2] : "-";
+                listaClientesEnEspera.Add(new GetClienteEsperaResponse { Nombre = clienteNombre, NumeroCliente = clienteNumero, Categoria = clienteCategoria });
             }
             return listaClientesEnEspera;
         }
 
         public async Task PonerClienteEnEspera(Domain.Cliente cliente)
         {
-            var cantidadDeClientes = await _dbRedis.ListLengthAsync(RedisConfig.REDIS_KEY);
-            RedisValue redisValue = new RedisValue($"{cliente.Numero};{cliente.Nombre};{cliente?.Categoria?.Nombre}");
+            var cantidadDeClientes = await ObtenerCantidadDeClientes();
+            RedisValue redisValue = new RedisValue($"{cliente.Numero};{cliente?.Nombre?.ToLower()};{cliente?.Categoria?.Nombre.ToLower()}");
 
             await _dbRedis.ListSetByIndexAsync(RedisConfig.REDIS_KEY, cantidadDeClientes + 1, redisValue);
+        }
+        private async Task<long> ObtenerCantidadDeClientes()
+        {
+            return await _dbRedis.ListLengthAsync(RedisConfig.REDIS_KEY);
+        }
+        private async Task<RedisValue> ObtenerClienteEnEsperaByIndex(int indice)
+        {
+            return await _dbRedis.ListGetByIndexAsync(RedisConfig.REDIS_KEY, indice);
         }
     }
 }

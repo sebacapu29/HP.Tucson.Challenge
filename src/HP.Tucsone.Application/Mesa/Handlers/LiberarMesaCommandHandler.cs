@@ -42,6 +42,7 @@ namespace HP.Tucsone.Application.Mesa.Handlers
                     var idNuevaReserva = await _reservaRepository.GenerarId();
                     var reservaDeClienteEneEspera = new Domain.Reserva(idNuevaReserva, fechaHora, clienteReserva, mesa.Numero);
                     await _reservaRepository.CrearReserva(reservaDeClienteEneEspera);
+                    await _clienteEnEsperaService.EliminarClienteEnEspera(clienteReserva);
                     return new LiberarMesaResponse { Mensaje = $"Mesa liberada y se asignó al cliente en espera {ultimoClienteEnEspera.Nombre}" };
                 }
                 return new LiberarMesaResponse { Mensaje = "Mesa liberada" };

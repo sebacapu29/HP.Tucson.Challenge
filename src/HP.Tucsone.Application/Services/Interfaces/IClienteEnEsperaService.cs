@@ -5,7 +5,7 @@ namespace HP.Tucsone.Application.Services.Interfaces
 {
     public interface IClienteEnEsperaService
     {
-        void EscucharClientesEnEspera();
+        Task EliminarClienteEnEspera(Domain.Cliente cliente);
         Task<List<GetClienteEsperaResponse>> ObtenerClientesEnEspera();
         Task PonerClienteEnEspera(Domain.Cliente cliente);
     }

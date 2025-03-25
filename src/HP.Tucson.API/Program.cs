@@ -31,7 +31,6 @@ builder.Services.AddSingleton<IClienteEnEsperaService, ClienteEnEsperaService>()
 var app = builder.Build();
 
 var clienteEnEsperaService = app.Services.GetRequiredService<IClienteEnEsperaService>();
-clienteEnEsperaService.EscucharClientesEnEspera();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

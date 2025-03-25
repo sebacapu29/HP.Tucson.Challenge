@@ -44,7 +44,8 @@ namespace HP.Tucsone.Application.Reserva.Handlers
                 }
                 if (mesaDisponible != null)
                 {
-                    var reserva = await this._reservaRepository.CrearReserva(new Domain.Reserva(1, request.FechaHora, clienteReserva, mesaDisponible.Numero));
+                    var idNuevaReserva = await _reservaRepository.GenerarId();
+                    var reserva = await _reservaRepository.CrearReserva(new Domain.Reserva(idNuevaReserva, request.FechaHora, clienteReserva, mesaDisponible.Numero));
                     _mesaRepository.OcuparMesa(mesaDisponible);
                     return new CreateReservaResponse { Mensaje = $"Reserva realizada con éxito en mesa {reserva.NumeroMesa}" };
                 }
@@ -77,7 +78,7 @@ namespace HP.Tucsone.Application.Reserva.Handlers
                 default:
                     return false;
             }
-            return (fechaReserva - fechaHoraActual).TotalHours >= horasMinimasRequeridas;
+            return Math.Round((fechaReserva - fechaHoraActual).TotalHours, 1) <= horasMinimasRequeridas;
         }
     }
 }
