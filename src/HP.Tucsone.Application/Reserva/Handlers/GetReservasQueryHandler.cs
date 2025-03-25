@@ -1,4 +1,5 @@
-﻿using HP.Tucsone.Application.FeatureReserva.Models.Queries;
+﻿using HP.Tucsone.Application.Exceptions;
+using HP.Tucsone.Application.FeatureReserva.Models.Queries;
 using HP.Tucsone.Application.FeatureReserva.Models.Responses;
 using HP.Tucsone.Domain.Interfaces;
 using MediatR;
@@ -21,9 +22,9 @@ namespace HP.Tucsone.Application.FeatureReserva.Handlers
                 var response = reservas!.Select(r => new GetReservasResponse { FechaHora = r.FechaHora, NumeroCliente = r?.Cliente?.Numero });
                 return response!.ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new UnespectedException("Ocurrio un error inesperado en la clase al liberar mesa", ex);
             }
         }
     }

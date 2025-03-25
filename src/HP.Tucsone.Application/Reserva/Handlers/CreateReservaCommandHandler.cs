@@ -1,4 +1,5 @@
-﻿using HP.Tucsone.Application.FeatureReserva.Models.Commands;
+﻿using HP.Tucsone.Application.Exceptions;
+using HP.Tucsone.Application.FeatureReserva.Models.Commands;
 using HP.Tucsone.Application.FeatureReserva.Models.Responses;
 using HP.Tucsone.Application.Services.Interfaces;
 using HP.Tucsone.Domain.Entities;
@@ -36,12 +37,12 @@ namespace HP.Tucsone.Application.FeatureReserva.Handlers
 
                 if (clienteReserva == null)
                 {
-                    throw new ArgumentNullException($"No se encontró el cliente número: {request.NumeroCliente}");
+                    throw new ClienteNotFoundException($"No se encontró el cliente número: {request.NumeroCliente}");
                 }
                 bool puedeReservar = PuedeReservar(request.FechaHora, clienteReserva!.Categoria!.Nombre);
                 if (!puedeReservar)
                 {
-                    throw new Exception("No esta habilitado para reservar");
+                    throw new ReservaNoPermitidaException("No esta habilitado para reservar");
                 }
                 if (mesaDisponible != null)
                 {
@@ -53,9 +54,17 @@ namespace HP.Tucsone.Application.FeatureReserva.Handlers
                 await _clienteEnEsperaService.PonerClienteEnEspera(clienteReserva);
                 return new CreateReservaResponse { Mensaje = "Cliente en espera" };
             }
-            catch
+            catch (ReservaNoPermitidaException)
             {
                 throw;
+            }
+            catch (ClienteNotFoundException)
+            {
+                throw;
+            }
+            catch(Exception ex)
+            {
+                throw new UnespectedException("Ocurrio un error en la clase al crear la reserva", ex);
             }
         }
         private bool PuedeReservar(DateTime fechaReserva, string categoria)

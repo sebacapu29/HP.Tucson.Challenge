@@ -49,6 +49,10 @@ namespace HP.Tucsone.Application.FeatureMesa.Handlers
                 }
                 return new LiberarMesaResponse { Mensaje = "Mesa liberada" };
             }
+            catch(MesaNotFoundException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 throw new UnespectedException("Ocurrio un error en la clase al liberar mesa", ex);

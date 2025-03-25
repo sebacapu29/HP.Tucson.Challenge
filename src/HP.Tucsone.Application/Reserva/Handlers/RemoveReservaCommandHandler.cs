@@ -1,4 +1,5 @@
-﻿using HP.Tucsone.Application.FeatureReserva.Models.Commands;
+﻿using HP.Tucsone.Application.Exceptions;
+using HP.Tucsone.Application.FeatureReserva.Models.Commands;
 using HP.Tucsone.Application.FeatureReserva.Models.Responses;
 using HP.Tucsone.Domain.Interfaces;
 using MediatR;
@@ -20,19 +21,23 @@ namespace HP.Tucsone.Application.FeatureReserva.Handlers
                 var reservasDelCliente = await this._reservaRepository.BuscarReservasDelCliente(request.NumeroCliente);
                 if (!reservasDelCliente.Any())
                 {
-                    throw new ArgumentNullException($"No existen reservas para el Cliente {request.NumeroCliente}");
+                    throw new ReservaNoEncontradaException($"No existen reservas para el Cliente {request.NumeroCliente}");
                 }
                 var reservaEspecifica = reservasDelCliente.Where(r => request.FechaHora.Equals(r.FechaHora)).FirstOrDefault();
                 if (reservaEspecifica == null)
                 {
-                    throw new ArgumentNullException($"No existen la reservas para el Cliente {request.NumeroCliente} en la fecha solicitada");
+                    throw new ReservaNoEncontradaException($"No existen la reserva para el Cliente {request.NumeroCliente} en la fecha solicitada");
                 }
                 await this._reservaRepository.EliminarReserva(reservaEspecifica);
                 return new RemoveReservaResponse { Numero = reservaEspecifica?.Cliente?.Numero, FechaHora = request.FechaHora };
             }
-            catch (Exception)
+            catch (ReservaNoEncontradaException)
             {
                 throw;
+            }
+            catch (Exception ex)
+            {
+                throw new UnespectedException("Ocurrio un error inesperado en la clase al liberar mesa", ex);
             }
         }
     }
