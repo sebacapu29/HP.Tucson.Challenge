@@ -5,6 +5,6 @@ namespace HP.Tucsone.Application.FeatureMesa.Models.Commands
 {
     public class LiberarMesaCommand : IRequest<LiberarMesaResponse>
     {
-        public int Numero { get; set; }
+        public int NumeroMesa { get; set; }
     }
 }

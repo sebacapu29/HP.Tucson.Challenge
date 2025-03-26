@@ -4,7 +4,7 @@ using HP.Tucsone.Application.Services.Interfaces;
 using HP.Tucsone.Tests.Mocks;
 using Moq;
 
-namespace HP.Tucsone.Tests.Application.Cliente
+namespace HP.Tucsone.Tests.Application.TestCliente
 {
     public class GetClienteEsperaQueryHandlerTest
     {

@@ -28,7 +28,7 @@ namespace HP.Tucsone.Application.FeatureMesa.Handlers
         {
             try
             {
-                var mesa = _mesaRepository.ObtenerMesaPorNumero(request.Numero);
+                var mesa = _mesaRepository.ObtenerMesaPorNumero(request.NumeroMesa);
                 var fechaHora = DateTime.Now;
                 if (mesa == null)
                 {

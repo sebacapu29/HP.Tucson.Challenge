@@ -1,4 +1,4 @@
-﻿namespace HP.Tucsone.Tests.Application.Reserva
+﻿namespace HP.Tucsone.Tests.Application.TestReserva
 {
     public class RemoveReservaHandlerTest
     {

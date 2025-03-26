@@ -4,7 +4,7 @@ using HP.Tucsone.Domain.Interfaces;
 using HP.Tucsone.Tests.Mocks;
 using Moq;
 
-namespace HP.Tucsone.Tests.Application.Reserva
+namespace HP.Tucsone.Tests.Application.TestReserva
 {
     public class GetReservasQueryHandlerTest
     {
@@ -16,7 +16,7 @@ namespace HP.Tucsone.Tests.Application.Reserva
         [Fact]
         public async Task Get_Clientes_En_Espera_Ok()
         {
-            _mockReservaRepository.Setup(rr => rr.ListarReservas()).Returns(Task.FromResult(MockReserva.GetValidListReservas()));
+            _mockReservaRepository.Setup(rr => rr.ListarReservas()).Returns(Task.FromResult(MocksReserva.GetValidListReservas()));
 
             var mockGetReservaQueryHandler = new GetReservasQueryHandler(_mockReservaRepository.Object);
             var query = new GetReservasQuery();

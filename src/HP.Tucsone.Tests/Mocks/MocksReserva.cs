@@ -1,10 +1,9 @@
 ﻿using HP.Tucsone.Application.FeatureReserva.Models.Responses;
-using HP.Tucsone.Domain;
 using HP.Tucsone.Domain.Entities;
 
 namespace HP.Tucsone.Tests.Mocks
 {
-    public class MockReserva
+    public class MocksReserva
     {
         public static List<GetReservasResponse> GetValidListReservasResponse()
         {
