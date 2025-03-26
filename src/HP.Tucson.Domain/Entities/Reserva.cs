@@ -14,12 +14,5 @@
             Cliente = cliente;
             NumeroMesa = numeroMesa;
         }
-        public enum TiempoReserva
-        {
-            Free = 0,
-            T48Hs = 1,
-            T72Hs = 2,
-            T96Hs = 3
-        }
     }
 }
