@@ -21,4 +21,4 @@ Este es un proyecto realizado con tecnologías .Net 8, con la finalidad de gesti
 - Clonar el proyecto
 - Tener instalado Docker ([Docker Page](https://docs.docker.com/desktop/setup/install/windows-install/) )
 - Levantar Redis local con Docker : `docker run --name redis-server -d -p 6379:6379 redis`
-- Ejecutar la API con Visual Studio 2022 o ejecutar el comando `dotnet run --launch-profile Desarrollo` o `dotnet run --launch-profile Desarrollo`
+- Ejecutar la API con Visual Studio 2022 o ejecutar el comando `dotnet run --launch-profile Desarrollo` o `dotnet run --launch-profile Testing`
