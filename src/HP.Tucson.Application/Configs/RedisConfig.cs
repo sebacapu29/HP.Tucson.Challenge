@@ -2,9 +2,9 @@
 {
     public class RedisConfig
     {
-        public const string HOST = "localhost";
-        public const int PORT = 6379;
-        public const string REDIS_KEY = "clientes_en_espera";
-        public const string REDIS_CHANNEL = "clientes_en_espera";
+        public string? Host { get; set; }
+        public int Port { get; set; }
+        public string? RedisKey { get; set; }
+        public string? RedisChannel { get; set; }
     }
 }
