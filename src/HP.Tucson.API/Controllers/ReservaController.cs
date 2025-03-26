@@ -1,6 +1,6 @@
-﻿using HP.Tucsone.Application.FeatureReserva.Models.Commands;
-using HP.Tucsone.Application.FeatureReserva.Models.Queries;
-using HP.Tucsone.Application.FeatureReserva.Models.Responses;
+﻿using HP.Tucson.Application.FeatureReserva.Models.Commands;
+using HP.Tucson.Application.FeatureReserva.Models.Queries;
+using HP.Tucson.Application.FeatureReserva.Models.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
