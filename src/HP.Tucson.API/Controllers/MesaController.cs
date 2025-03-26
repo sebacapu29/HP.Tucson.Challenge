@@ -1,5 +1,5 @@
-﻿using HP.Tucson.Application.FeatureMesa.Models.Commands;
-using HP.Tucson.Application.FeatureMesa.Models.Responses;
+﻿using HP.Tucsone.Application.FeatureMesa.Models.Commands;
+using HP.Tucsone.Application.FeatureMesa.Models.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

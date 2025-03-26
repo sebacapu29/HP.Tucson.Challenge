@@ -12,9 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HP.Tucson.Application\HP.Tucson.Application.csproj" />
-    <ProjectReference Include="..\HP.Tucson.Domain\HP.Tucson.Domain.csproj" />
-    <ProjectReference Include="..\HP.Tucson.Infrastructure\HP.Tucson.Infrastructure.csproj" />
+    <ProjectReference Include="..\HP.Tucsone.Application\HP.Tucsone.Application.csproj" />
+    <ProjectReference Include="..\HP.Tucsone.Infrastructure\HP.Tucsone.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
