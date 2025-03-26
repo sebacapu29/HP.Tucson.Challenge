@@ -43,6 +43,11 @@ namespace HP.Tucsone.Infrastructure
             return Task.FromResult(ultimoId);
         }
 
+        public Task<Reserva?> GetReservaByClienteYFecha(int numeroCliente, DateTime fechaHora)
+        {
+            return Task.FromResult(_reservas!.Where(r => r!.Cliente!.Numero == numeroCliente && r.FechaHora.Equals(fechaHora)).FirstOrDefault());
+        }
+
         public Task<IReadOnlyList<Reserva>?> ListarReservas()
         {
             IReadOnlyList<Reserva> listaReservas = _reservas!.ToList();

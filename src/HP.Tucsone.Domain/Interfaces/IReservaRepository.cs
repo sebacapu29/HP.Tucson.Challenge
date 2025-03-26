@@ -9,5 +9,6 @@ namespace HP.Tucsone.Domain.Interfaces
         Task EliminarReserva(Reserva reserva);
         Task<IReadOnlyList<Reserva>> BuscarReservasDelCliente(int numeroCliente);
         Task<int> GenerarId();
+        Task<Reserva> GetReservaByClienteYFecha(int numeroCliente, DateTime fechaHora);
     }
 }

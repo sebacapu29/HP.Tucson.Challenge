@@ -30,6 +30,11 @@ namespace HP.Tucsone.Application.FeatureReserva.Handlers
         {
             try
             {
+                var reservaYaCreada = await _reservaRepository.GetReservaByClienteYFecha(request.NumeroCliente, request.FechaHora);
+                if(reservaYaCreada != null)
+                {
+                    throw new ReservaDuplicadaException($"Ya existe una reserva para el cliente {request.NumeroCliente} a las {request.FechaHora}");
+                }
                 var mesas = _mesaRepository.ObtenerTodas();
                 var mesaDisponible = mesas.Where(m => m.Disponible).FirstOrDefault();
                 var clienteReserva = await _clienteRepository.GetClienteByNumero(request.NumeroCliente);
@@ -44,6 +49,7 @@ namespace HP.Tucsone.Application.FeatureReserva.Handlers
                 {
                     throw new ReservaNoPermitidaException("No esta habilitado para reservar");
                 }
+                
                 if (mesaDisponible != null)
                 {
                     var idNuevaReserva = await _reservaRepository.GenerarId();
@@ -53,6 +59,10 @@ namespace HP.Tucsone.Application.FeatureReserva.Handlers
                 }
                 await _clienteEnEsperaService.PonerClienteEnEspera(clienteReserva);
                 return new CreateReservaResponse { Mensaje = "Cliente en espera" };
+            }
+            catch (ReservaDuplicadaException)
+            {
+                throw;
             }
             catch (ReservaNoPermitidaException)
             {
