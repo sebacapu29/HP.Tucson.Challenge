@@ -1,10 +1,10 @@
-using HP.Tucsone.Application.FeatureCliente.Handlers;
-using HP.Tucsone.Application.FeatureMesa.Handlers;
-using HP.Tucsone.Application.FeatureReserva.Handlers;
-using HP.Tucsone.Application.Services.Implementations;
-using HP.Tucsone.Application.Services.Interfaces;
-using HP.Tucsone.Domain.Interfaces;
-using HP.Tucsone.Infrastructure;
+using HP.Tucson.Application.FeatureCliente.Handlers;
+using HP.Tucson.Application.FeatureMesa.Handlers;
+using HP.Tucson.Application.FeatureReserva.Handlers;
+using HP.Tucson.Application.Services.Implementations;
+using HP.Tucson.Application.Services.Interfaces;
+using HP.Tucson.Domain.Interfaces;
+using HP.Tucson.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,5 @@
-﻿using HP.Tucsone.Application.FeatureCliente.Models.Queries;
-using HP.Tucsone.Application.FeatureCliente.Models.Responses;
+﻿using HP.Tucson.Application.FeatureCliente.Models.Queries;
+using HP.Tucson.Application.FeatureCliente.Models.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
