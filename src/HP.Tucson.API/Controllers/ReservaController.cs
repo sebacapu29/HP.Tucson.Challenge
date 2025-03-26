@@ -16,19 +16,19 @@ namespace HP.Tucson.API.Controllers
             _sender = sender;
         }
 
-        [HttpGet(Name = "Listar-Reservas")]
+        [HttpGet("listar-reservas")]
         public async Task<IEnumerable<GetReservasResponse>> GetAsync()
         {
             var reservas = await _sender.Send(new GetReservasQuery());
             return reservas;
         }
-        [HttpPost(Name = "Crear-Reservar")]
+        [HttpPost("crear-reservar")]
         public async Task<CreateReservaResponse> PostAsync(CreateReservaCommand reserva)
         {
             var reservas = await _sender.Send(reserva);
             return reservas;
         }
-        [HttpDelete(Name = "Eliminar-Reservar")]
+        [HttpDelete("eliminar-reservar")]
         public async Task<RemoveReservaResponse> DeleteAsync(RemoveReservaCommand reserva)
         {
             var reservas = await _sender.Send(reserva);

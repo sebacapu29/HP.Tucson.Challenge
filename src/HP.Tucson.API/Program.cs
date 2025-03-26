@@ -5,6 +5,7 @@ using HP.Tucson.Application.Services.Implementations;
 using HP.Tucson.Application.Services.Interfaces;
 using HP.Tucson.Domain.Interfaces;
 using HP.Tucson.Infrastructure;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Tucson API",
+        Description = "ASP.NET Core Web API Para gestionar las reservas del restaurant",
+        TermsOfService = new Uri("https://www.palermo.com.ar/es/gastronomia/n/reserva-tucson")
+    });
+});
 builder.Services.AddMediatR(configuration =>
 {
     configuration.RegisterServicesFromAssembly(typeof(GetReservasQueryHandler).Assembly);

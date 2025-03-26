@@ -14,7 +14,7 @@ namespace HP.Tucson.API.Controllers
         {
             _sender = sender;
         }
-        [HttpPut(Name = "Liberar-Mesa")]
+        [HttpPut("liberar-mesa")]
         public async Task<LiberarMesaResponse> DeleteAsync(LiberarMesaCommand mesa)
         {
             var mesaResponse = await _sender.Send(mesa);

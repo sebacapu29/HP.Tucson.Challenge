@@ -14,8 +14,7 @@ namespace HP.Tucson.API.Controllers
         {
             _sender = sender;
         }
-
-        [HttpGet(Name = "Obtener-Cliente-En-Espera")]
+        [HttpGet("cliente-en-espera")]
         public async Task<IEnumerable<GetClienteEsperaResponse>> GetAsync()
         {
             var clientesEnEspera = await _sender.Send(new GetClienteEsperaQuery());
